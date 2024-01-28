@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script> document.documentElement.className += ' js'</script>
+  <link rel="stylesheet" href="style.css">
+  <title>Conversor</title>
+</head>
+
+<body class="js-scroll">
+  <div class="container">
+    <div class="container-tittle">
+      <h1 class="tittle">Conversor de moeda</h1>
+    </div>
+
+    <div class="entrada js-scroll">
+      <div class="entrada-tittle">
+        <img src="./img/bandeira-do-brasil-3.png" alt="">
+        <h2>BRL</h2>
+      </div>
+      <input id="entrada" type="number" value=0>
+      <p id="resultado2">0 USD = 0,00 BRL</p>
+    </div>
+  </div>
+
+  <div class="divisao">
+    <img id="btn" class="transfer" src="./img/file-transfer.png" alt="">
+  </div>
+
+
+  <div class="container js-scroll">
+    <div class="entrada">
+      <div class="entrada-tittle">
+        <img id="bandeira" src="./img/estados-unidos-da-america.png">
+        <h2 id="pais-selecionado">USD</h2>
+      </div>
+      <p class="resultado"></p>
+      <p id="resultado">Valor de entrada não é um número válido.</p>
+    </div>
+  </div>
+
+  <div class="moeda">
+    <ul class="moeda-lista">
+      <li id="eua">Dólar</li>
+      <li id="eur">Euro</li>
+      <li id="lbr">Libra</li>
+      <li id="btc">Bitcoin</li>
+    </ul>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
