@@ -4,14 +4,15 @@ const dollar = document.querySelector("#eua");
 const euro = document.querySelector("#eur");
 const libra = document.querySelector("#lbr");
 const bitcoin = document.querySelector("#btc");
+const pais = document.querySelector("#pais-selecionado");
+const bandeiraSelecionada = document.querySelector("#bandeira");
+const res = document.querySelector("#resultado");
+const res2 = document.querySelector("#resultado2");
+const resultado = document.querySelector(".resultado");
 
 function conversor(nomeMoeda) {
   this.nomeMoeda = nomeMoeda;
-  const res = document.querySelector("#resultado");
   const real = parseFloat(entrada.value);
-  const pais = document.querySelector("#pais-selecionado");
-  const res2 = document.querySelector("#resultado2");
-  const resultado = document.querySelector(".resultado");
 
   this.calc = () => {
     async function ValorMoedasAtt() {
@@ -19,7 +20,7 @@ function conversor(nomeMoeda) {
         `https://economia.awesomeapi.com.br/json/last/${nomeMoeda}`
       );
       const jsonMoeda = await valormoeda.json();
-      pais.innerHTML = nomeMoeda;
+      pais.innerText = nomeMoeda;
 
       if (real === 0 || isNaN(real)) {
         res.innerHTML = "Valor de entrada não é um número válido.";
@@ -29,7 +30,7 @@ function conversor(nomeMoeda) {
         if (nomeMoeda === "BTC") {
           res.innerHTML = `${real} BRL =  ${this.res.toFixed(7)} BTC`;
           res2.innerHTML = `${this.res.toFixed(7)} BTC = ${real} BRL`;
-          resultado.innerHTML = `${this.res.toFixed(7)}`;
+          resultado.innerHTML = this.res.toFixed(7);
         } else {
           res.innerHTML = `${real} BRL = ${this.res.toLocaleString(undefined, {
             style: "currency",
@@ -40,7 +41,7 @@ function conversor(nomeMoeda) {
             currency: nomeMoeda,
           })} = ${real} BRL`;
 
-          resultado.innerHTML = `${this.res.toFixed(2)}`;
+          resultado.innerHTML = this.res.toFixed(2);
         }
       }
     }
@@ -52,21 +53,25 @@ btn.addEventListener("click", () => {
   switch (true) {
     case btnDollar:
       const eua = new conversor("USD");
+      bandeiraSelecionada.src = "./img/estados-unidos-da-america.png";
       eua.calc();
       break;
 
     case btnEuro:
       const eur = new conversor("EUR");
+      bandeiraSelecionada.src = "./img/alemanha.png";
       eur.calc();
       break;
 
     case btnLibra:
       const lbr = new conversor("GBP");
+      bandeiraSelecionada.src = "./img/inglaterra.png";
       lbr.calc();
       break;
 
     case btnBitcoin:
       const btc = new conversor("BTC");
+      bandeiraSelecionada.src = "./img/bitcoin.png";
       btc.calc();
       break;
 
@@ -82,9 +87,7 @@ let btnLibra = false;
 let btnBitcoin = false;
 
 function botaoSelecionado() {
-  let bandeiraSelecionada = document.querySelector("#bandeira");
   dollar.addEventListener("click", () => {
-    bandeiraSelecionada.src = "./img/estados-unidos-da-america.png";
     btnDollar = true;
     btnEuro = false;
     btnLibra = false;
@@ -92,7 +95,6 @@ function botaoSelecionado() {
   });
 
   euro.addEventListener("click", () => {
-    bandeiraSelecionada.src = "./img/alemanha.png";
     btnEuro = true;
     btnDollar = false;
     btnLibra = false;
@@ -100,7 +102,6 @@ function botaoSelecionado() {
   });
 
   libra.addEventListener("click", () => {
-    bandeiraSelecionada.src = "./img/inglaterra.png";
     btnLibra = true;
     btnDollar = false;
     btnEuro = false;
@@ -108,24 +109,23 @@ function botaoSelecionado() {
   });
 
   btc.addEventListener("click", () => {
-    bandeiraSelecionada.src = "./img/bitcoin.png";
     btnBitcoin = true;
     btnDollar = false;
     btnEuro = false;
     btnLibra = false;
   });
 
-  const ativo = document.querySelectorAll(".moeda-lista li");
-  ativo.forEach((item) => {
-    item.addEventListener("click", () => {
-      ativo.forEach((li) => {
-        li.classList.remove("selecionado");
-      });
-
-      item.classList.add("selecionado");
-    });
-  });
 }
+const ativo = document.querySelectorAll(".moeda-lista li");
+ativo.forEach((item) => {
+  item.addEventListener("click", () => {
+    ativo.forEach((li) => {
+      li.classList.remove("selecionado");
+    });
+
+    item.classList.add("selecionado");
+  });
+});
 
 botaoSelecionado();
 
