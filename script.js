@@ -44,16 +44,23 @@ function conversor(moeda, nomeMoeda) {
     if (real === 0 || isNaN(real)) {
       res.innerHTML = "Valor de entrada não é um número válido.";
     } else {
-      this.res = real / this.moeda;
+      async function fetchBitcoinm() {
+        const btcFetch = await fetch("https://blockchain.info/ticker");
+        const jsonBtc = await btcFetch.json();
+        const valorBtc = jsonBtc.BRL.sell;
 
-      res.innerHTML = `${real} BRL =  ${this.res.toFixed(7)} BTC`;
+        this.res = real / valorBtc;
 
-      let res2 = document.querySelector("#resultado2");
+        res.innerHTML = `${real} BRL =  ${this.res.toFixed(7)} BTC`;
 
-      res2.innerHTML = `${this.res.toFixed(7)} BTC = ${real} BRL`;
+        let res2 = document.querySelector("#resultado2");
 
-      let resultado = document.querySelector(".resultado");
-      resultado.innerHTML = `${this.res.toFixed(7)}`;
+        res2.innerHTML = `${this.res.toFixed(7)} BTC = ${real} BRL`;
+
+        let resultado = document.querySelector(".resultado");
+        resultado.innerHTML = `${this.res.toFixed(7)}`;
+      }
+      fetchBitcoinm();
     }
   };
 }
