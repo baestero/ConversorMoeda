@@ -10,67 +10,69 @@ const res = document.querySelector("#resultado");
 const res2 = document.querySelector("#resultado2");
 const resultado = document.querySelector(".resultado");
 
-function conversor(nomeMoeda) {
-  this.nomeMoeda = nomeMoeda;
-  const real = parseFloat(entrada.value);
+class Conversor {
+  constructor(nomeMoeda) {
+    this.nomeMoeda = nomeMoeda;
+    this.real = parseFloat(entrada.value);
+  }
 
-  this.calc = () => {
-    async function ValorMoedasAtt() {
-      const valormoeda = await fetch(
-        `https://economia.awesomeapi.com.br/json/last/${nomeMoeda}`
-      );
-      const jsonMoeda = await valormoeda.json();
-      pais.innerText = nomeMoeda;
+  async calc() {
+    const valormoeda = await fetch(
+      `https://economia.awesomeapi.com.br/json/last/${this.nomeMoeda}-BRL`
+    );
+    const jsonMoeda = await valormoeda.json();
+    const moedaData = jsonMoeda[`${this.nomeMoeda}BRL`];
+    pais.innerText = this.nomeMoeda;
 
-      if (real === 0 || isNaN(real)) {
-        res.innerHTML = "Valor de entrada não é um número válido.";
-        resultado.innerText = "";
+    if (this.real === 0 || isNaN(this.real)) {
+      res.innerHTML = "Valor de entrada não é um número válido.";
+      resultado.innerText = "";
+    } else {
+      this.res = this.real / moedaData.ask;
+      if (this.nomeMoeda === "BTC") {
+        res.innerHTML = `${this.real} BRL = ${this.res.toFixed(7)} BTC`;
+        res2.innerHTML = `${this.res.toFixed(7)} BTC = ${this.real} BRL`;
+        resultado.innerHTML = this.res.toFixed(7);
       } else {
-        this.res = real / jsonMoeda[nomeMoeda + "BRL"].ask;
-        if (nomeMoeda === "BTC") {
-          res.innerHTML = `${real} BRL =  ${this.res.toFixed(7)} BTC`;
-          res2.innerHTML = `${this.res.toFixed(7)} BTC = ${real} BRL`;
-          resultado.innerHTML = this.res.toFixed(7);
-        } else {
-          res.innerHTML = `${real} BRL = ${this.res.toLocaleString(undefined, {
+        res.innerHTML = `${this.real} BRL = ${this.res.toLocaleString(
+          undefined,
+          {
             style: "currency",
-            currency: nomeMoeda,
-          })}`;
-          res2.innerHTML = `${this.res.toLocaleString(undefined, {
-            style: "currency",
-            currency: nomeMoeda,
-          })} = ${real} BRL`;
-
-          resultado.innerHTML = this.res.toFixed(2);
-        }
+            currency: this.nomeMoeda,
+          }
+        )}`;
+        res2.innerHTML = `${this.res.toLocaleString(undefined, {
+          style: "currency",
+          currency: this.nomeMoeda,
+        })} = ${this.real} BRL`;
+        resultado.innerHTML = this.res.toFixed(2);
       }
     }
-    ValorMoedasAtt();
-  };
+  }
 }
 
 btn.addEventListener("click", () => {
   switch (true) {
     case btnDollar:
-      const eua = new conversor("USD");
+      const eua = new Conversor("USD");
       bandeiraSelecionada.src = "./img/estados-unidos-da-america.png";
       eua.calc();
       break;
 
     case btnEuro:
-      const eur = new conversor("EUR");
+      const eur = new Conversor("EUR");
       bandeiraSelecionada.src = "./img/alemanha.png";
       eur.calc();
       break;
 
     case btnLibra:
-      const lbr = new conversor("GBP");
+      const lbr = new Conversor("GBP");
       bandeiraSelecionada.src = "./img/inglaterra.png";
       lbr.calc();
       break;
 
     case btnBitcoin:
-      const btc = new conversor("BTC");
+      const btc = new Conversor("BTC");
       bandeiraSelecionada.src = "./img/bitcoin.png";
       btc.calc();
       break;
@@ -114,7 +116,6 @@ function botaoSelecionado() {
     btnEuro = false;
     btnLibra = false;
   });
-
 }
 const ativo = document.querySelectorAll(".moeda-lista li");
 ativo.forEach((item) => {
