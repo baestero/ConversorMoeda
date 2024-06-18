@@ -134,3 +134,7 @@ const animacao = document.querySelectorAll(".js-scroll");
 animacao.forEach((item) => {
   item.classList.add("ativo1");
 });
+
+
+
+
