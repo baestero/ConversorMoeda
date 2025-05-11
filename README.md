@@ -19,9 +19,6 @@ Neste projeto você encontrará:
 
 ## 🖼 Preview
 
-Adicionei abaixo um preview do projeto para visualização rápida:
-**(substitua o link abaixo pela URL da imagem desejada)**
-
 ![Preview do Projeto](./image.png)
 
 ## 🛠 Tecnologias Utilizadas
