@@ -19,7 +19,7 @@ Neste projeto você encontrará:
 
 ## 🖼 Preview
 
-Adicionei abaixo um preview do projeto para visualização rápida:
+**Adicionei abaixo um preview do projeto para visualização rápida:**
 
 ![Preview do Projeto](./image.png)
 
