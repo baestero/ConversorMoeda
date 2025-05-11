@@ -21,7 +21,7 @@ Neste projeto você encontrará:
 
 Adicionei abaixo um preview do projeto para visualização rápida:
 
-![Preview do Projeto](./image.png)
+![Preview do Projeto](https://github.com/baestero/ConversorMoeda/blob/main/image.png)
 
 ## 🛠 Tecnologias Utilizadas
 
